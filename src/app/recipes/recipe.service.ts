@@ -30,20 +30,25 @@ export class RecipeService {
                 new Ingredient('Eggs', 3),
                 new Ingredient('Cheese', 2)
             ])
-      ];
+    ];
 
-      constructor(private slService: ShoppingListService) {
+    constructor(private slService: ShoppingListService) {
 
-      }
+    }
 
-      getRecipes() {
-          // to use only the copy instead of the original.
-          return this.recipes.slice(); 
-      }
+    getRecipes() {
+        // to use only the copy instead of the original.
+        return this.recipes.slice(); 
+    }
 
-      addIngredientsToShoppingList(ingredients: Ingredient[]) {
-          this.slService.addIngredients(ingredients);
+    getRecipe(index: number) {
+        return this.recipes.slice()[index] ;// get a copy of the array.
 
-      }
+    }
+
+    addIngredientsToShoppingList(ingredients: Ingredient[]) {
+        this.slService.addIngredients(ingredients);
+
+    }
 
 }
