@@ -10,6 +10,10 @@ export class RecipeItemComponent implements OnInit {
 
   @Input() recipe: Recipe;
 
+  // Property binding , so we can pass the index of the item from outisde,
+  // here : from recipe-list-component.
+  @Input() index: number;
+
   ngOnInit() {
   }
 }

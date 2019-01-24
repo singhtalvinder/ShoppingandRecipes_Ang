@@ -1,5 +1,15 @@
+<!-- bind router link as its dynamic link and we need to pass the array which will
+   allow to configure the segment for segment of the path.
+   first segnemt is the only segment that is ideal one to load. we'll load it as a 
+   relative path as the list is already loaded at the /recipes.
+   To get the id we need to pass extra information  to the recipe-item-component.
+   Next: use routerLinkActive to show the active link.
+   -->
 <a
 style="cursor: pointer;"
+[routerLink] = "[index]"
+routerLinkActive = "active"
+
 class = "list-group-item clearfix">
  <div class = "pull-left">
    <h4 class = "list-group-item-heading">{{recipe.name}}</h4>
