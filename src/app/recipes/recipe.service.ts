@@ -1,11 +1,14 @@
 import { Recipe } from './recipe.model';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+
 @Injectable()
 export class RecipeService {
-   // recipeSelected = new EventEmitter<Recipe>();
+   recipesChanged = new Subject<Recipe[]>();
     
     private recipes: Recipe[] = [
         new Recipe(
@@ -22,6 +25,7 @@ export class RecipeService {
          new Recipe(
              'Tasty Spaghetti', 
              'This is spaghetti recipe',
+             //'//pixabay.com/en/spaghetti-eat-noodles-shell-1988004/',
              '//pixnio.com/free-images/2017/03/25/2017-03-25-09-34-43-725x483.jpg',
              [
                 new Ingredient('Spaghetti', 125),
@@ -43,12 +47,29 @@ export class RecipeService {
 
     getRecipe(index: number) {
         return this.recipes.slice()[index] ;// get a copy of the array.
-
     }
 
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.slService.addIngredients(ingredients);
+    }
 
+    // Add recipe
+    addRecipe(recipe: Recipe) {
+        this.recipes.push(recipe);
+        // Emit the new copy as the latest recipes.
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    // update existing.
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe;
+        // Emit the new copy as the latest recipes.
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index,1);
+        this.recipesChanged.next(this.recipes.slice());
     }
 
 }
