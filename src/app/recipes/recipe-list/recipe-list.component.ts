@@ -31,7 +31,6 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     // remember: we ar already at "/recipes", so use relative path
     // and inform the router about current route.
     this.router.navigate(['new'], { relativeTo: this.route});
-
   }
 
   ngOnDestroy(){
