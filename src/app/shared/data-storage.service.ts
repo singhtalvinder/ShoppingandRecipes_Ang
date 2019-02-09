@@ -14,9 +14,7 @@ export class DataStorageService {
     constructor(private httpClient: HttpClient,
         private recipeService: RecipeService,
         private authService: AuthService
-        ) {
-
-        }
+        ) { }
 
     storeRecipes() {
         const token = this.authService.getToken();
