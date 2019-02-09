@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { HomeComponent } from './core/home/home.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
 
 // dynamic parameters should be the last ones.
 const appRoutes : Routes = [
@@ -12,7 +14,9 @@ const appRoutes : Routes = [
     { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'},
                                           //, canLoad: [AuthGuard]}, //Protecting lazy loaded routes
                                           // provided  AuthGuard implements CanLoad interface!!
-    { path: 'shopping-list',  component: ShoppingListComponent }
+    { path: 'shopping-list',  component: ShoppingListComponent },
+    { path: 'signup', component: SignupComponent},
+    { path: 'signin', component: SigninComponent}
 ];
 
 @NgModule({
