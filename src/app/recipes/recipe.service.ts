@@ -25,8 +25,9 @@ export class RecipeService {
          new Recipe(
              'Tasty Spaghetti', 
              'This is spaghetti recipe',
+             "//upload.wikimedia.org/wikipedia/commons/9/98/Spaghetti-prepared.jpg",
              //'//pixabay.com/en/spaghetti-eat-noodles-shell-1988004/',
-             '//pixnio.com/free-images/2017/03/25/2017-03-25-09-34-43-725x483.jpg',
+             //'//pixnio.com/free-images/2017/03/25/2017-03-25-09-34-43-725x483.jpg',
              [
                 new Ingredient('Spaghetti', 125),
                 new Ingredient('Spices', 15),

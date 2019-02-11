@@ -15,9 +15,14 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu">
-        <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
-        <li><a style="cursor: pointer;" (click) = "onEditRecipe()">Edit Recipe</a></li>
-        <li><a style="cursor: pointer;" (click) = "onDeleteRecipe()">Delete Recipe</a></li>
+        <!-- <ng-template [ngIf]="isAuthenticated()"> -->
+          <li><a (click)="onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
+          <li><a style="cursor: pointer;" (click) = "onEditRecipe()">Edit Recipe</a></li>
+          <li><a style="cursor: pointer;" (click) = "onDeleteRecipe()">Delete Recipe</a></li>
+        <!-- </ng-template> -->
+        <!-- <ng-template [ngIf]="!isAuthenticated()">
+          <li>Please login to access these options!!</li>
+        </ng-template> -->
       </ul>
     </div>
   </div>

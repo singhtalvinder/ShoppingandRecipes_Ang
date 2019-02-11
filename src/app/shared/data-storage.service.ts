@@ -18,17 +18,20 @@ export class DataStorageService {
 
     storeRecipes() {
         const token = this.authService.getToken();
+        console.log(`the recipe to write: ${this.recipeService.getRecipes()}`)
          return this.httpClient.put(
-            'https://https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token,
+            'https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token,
             this.recipeService.getRecipes());
     }
 /* TODO: Fix the map issue ------*/
     getRecipes() {
         const token = this.authService.getToken();
         //<Recipe[]>
+        console.log('Getting recipes from the server db........')
        this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token)
-        /*.pipe(
-            map ( (response: Response) => {
+        .pipe(
+            map ( (response: Response) =>  {
+                console.log(response);
             const recipes: Recipe[] = response;//.json();
             
             for(let recipe of recipes) {
@@ -42,9 +45,10 @@ export class DataStorageService {
             }
             return recipes;
           })
-        )  */    
+        )     
         .subscribe(
-            (recipes: Recipe[]) => {                
+            (recipes: Recipe[]) => {     
+                console.log('Got some recipes after a get request from server .........')           
                 this.recipeService.setRecipes(recipes);
             }
         );
