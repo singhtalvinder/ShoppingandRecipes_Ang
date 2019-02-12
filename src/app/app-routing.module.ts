@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { HomeComponent } from './core/home/home.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -19,8 +19,8 @@ const appRoutes : Routes = [
     { path: 'signin', component: SigninComponent}
 ];
 
-@NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
+@NgModule({                                   //Preloading is used to do lazyloading but in a pre load manner.
+    imports: [RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})],
     exports: [RouterModule]
 })
 export class AppRoutingModule {
