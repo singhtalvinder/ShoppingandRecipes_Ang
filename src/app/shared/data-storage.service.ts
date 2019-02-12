@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-//import 'rxjs/Rx';
+//import 'rxjs/Rx';////
 import { map } from 'rxjs/operators';
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
 import { Response } from '@angular/http';
 
 import { AuthService } from '../auth/auth.service';
+
 
 
 @Injectable()
@@ -23,44 +24,31 @@ export class DataStorageService {
             'https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token,
             this.recipeService.getRecipes());
     }
-/* TODO: Fix the map issue ------*/
+
     getRecipes() {
         const token = this.authService.getToken();
-        //<Recipe[]>
         console.log('Getting recipes from the server db........')
-       this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token)
-        .pipe(
-            map ( (response: Response) =>  {
-                console.log(response);
-            const recipes: Recipe[] = response;//.json();
-            
-            for(let recipe of recipes) {
-                if(!recipe['ingredients']) {
-                    // If no ingredients fetched from a recipe, add  an empty ingredients 
-                    // property(justto maintain the structure) to be in sync with others.
-                    console.log(recipe);
-
-                    recipe['ingredients'] = [];
-                }
-            }
-            return recipes;
-          })
-        )     
+        this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token)
         .subscribe(
             (recipes: Recipe[]) => {     
-                console.log('Got some recipes after a get request from server .........')           
+                console.log('Got some recipes after a get request from server .........')    
+                console.log(recipes);
                 this.recipeService.setRecipes(recipes);
             }
         );
     }
-    /*
-    getRecipes() {
-        //const token = this.authService.getToken();
-        //this.httpClient.get<Recipe[]>('https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token)
-        
-        this.httpClient.get<Recipe[]>('https://my-recipe-book-314be.firebaseio.com/recipes.json')
-        .map(
-            (recipes) =>{
+}
+
+//// Was working  so replace it back if needed....
+/*
+getRecipes() {
+    const token = this.authService.getToken();
+    //<Recipe[]>
+    console.log('Getting recipes from the server db........')
+   this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json?auth=' + token)
+    .pipe(
+        map(
+            (recipes: Recipe[]) =>{
                 for(let recipe of recipes) {
                     if(!recipe['ingredients']) {
                         recipe['ingredients'] = [];
@@ -69,12 +57,12 @@ export class DataStorageService {
                 return recipes;
             }
         )
-        .subscribe(
-            recipes: Recipe[]) => {
-
-            }
-        )
-
-    }*/
- 
+    )  
+    .subscribe(
+        (recipes: Recipe[]) => {     
+            console.log('Got some recipes after a get request from server .........')           
+            this.recipeService.setRecipes(recipes);
+        }
+    );
 }
+*/

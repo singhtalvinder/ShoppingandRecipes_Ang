@@ -46,7 +46,6 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   isAuthenticated() {
-    
     return this.authService.isAuthenticated();
   }
 
