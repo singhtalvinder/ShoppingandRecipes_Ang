@@ -17,25 +17,53 @@ export class DataStorageService {
         private authService: AuthService
         ) { }
 
+    // storeRecipes() {
+    //     // using headers and params...
+    //     const token = this.authService.getToken();
+    //     console.log(`the recipe to write: ${this.recipeService.getRecipes()}`)
+    //      return this.httpClient.put(
+    //         'https://my-recipe-book-314be.firebaseio.com/recipes.json',
+    //         this.recipeService.getRecipes(), {
+    //             params: new HttpParams().set('auth', token)
+    //         });
+    // }
+
+    // getRecipes() {
+    //     // using headers and params...
+    //     const token = this.authService.getToken();
+    //     console.log('Getting recipes from the server db........')
+    //     this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json', 
+    //     {
+    //         params: new HttpParams().set('auth', token)
+    //     })
+    //     .subscribe(
+    //         (recipes: Recipe[]) => {     
+    //             console.log('Got some recipes after a get request from server .........')    
+    //             console.log(recipes);
+    //             this.recipeService.setRecipes(recipes);
+    //         }
+    //     );
+    // }
+
+    // Alternate way !!
+
+    // another approach, generally used with large files is to use 'reportProgress: true',
+    /// as done below ...
+    
     storeRecipes() {
-        // using headers and params...
-        const token = this.authService.getToken();
-        console.log(`the recipe to write: ${this.recipeService.getRecipes()}`)
-         return this.httpClient.put(
-            'https://my-recipe-book-314be.firebaseio.com/recipes.json',
-            this.recipeService.getRecipes(), {
-                params: new HttpParams().set('auth', token)
-            });
-    }
+        // using interceptors and not passing any token here in the request.
+        
+        const req = new HttpRequest('PUT',
+          'https://my-recipe-book-314be.firebaseio.com/recipes.json',
+          this.recipeService.getRecipes(), {reportProgress: true}
+        );
+        return this.httpClient.request(req);
+    } 
 
     getRecipes() {
-        // using headers and params...
-        const token = this.authService.getToken();
+        // using interceptors and not passing any token here in the request.
         console.log('Getting recipes from the server db........')
-        this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json', 
-        {
-            params: new HttpParams().set('auth', token)
-        })
+        this.httpClient.get('https://my-recipe-book-314be.firebaseio.com/recipes.json')
         .subscribe(
             (recipes: Recipe[]) => {     
                 console.log('Got some recipes after a get request from server .........')    
@@ -45,9 +73,6 @@ export class DataStorageService {
         );
     }
 
-    // Alternate way !!
-
-    // another approach, generally used with large files...
     // storeRecipes() {
     //     // using headers and params...
     //     const token = this.authService.getToken();
